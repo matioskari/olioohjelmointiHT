@@ -1,4 +1,6 @@
-# OlioOhjelmointi harjoitustyö
+# OlioOhjelmointi harjoitustyö Sijoitussalkun simulaattori & backtesteri
+
+- Tänne tulee sitten tietoa harjoitustyöstäni kun saan aikaiseksi sen kanssa edetä.
 
 
 
