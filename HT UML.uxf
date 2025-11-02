@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>777</x>
+      <y>70</y>
+      <w>147</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Candle
+--
++date: Date
++open: Double
++high: Double
++low: Double
++close: Double
++volume: Double
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>203</x>
+      <y>70</y>
+      <w>210</w>
+      <h>91</h>
+    </coordinates>
+    <panel_attributes>Strategy
+--
+
+
+--
++generateOrders(candles: [Candle]): [Order]
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>525</x>
+      <y>70</y>
+      <w>147</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Order
+--
++id: UUID
++instrument: String
++quantity: Double
++price: Double
++dataCreated: Data
++side: String // "BUY" tai "SELL"
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>749</x>
+      <y>259</y>
+      <w>196</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>MarketDataSource
+--
+
+
+--
++readCSVData(filePath: String): [Candle]
++generateSyntheticData(): [Candle]
++availableSymbols(): List
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>406</x>
+      <y>98</y>
+      <w>133</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+generates</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>665</x>
+      <y>98</y>
+      <w>126</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+based on</panel_attributes>
+    <additional_attributes>160.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>847</x>
+      <y>189</y>
+      <w>63</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+generates</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>756</x>
+      <y>441</y>
+      <w>308</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>RiskMetrics
+--
+
+
+--
++calculateCAGR(equityCurve: List&gt;): Double
++calculateMaxDrawdown(equityCurve: List&gt;): Double
++calculateVolatility(returns: List): Double
++calculateShrapeRatio(returns: List, riskFreeRate: Double): Double
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>427</x>
+      <y>455</y>
+      <w>210</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Report
+--
+
+
+--
++generateReport(trades: List, metrics: Map)
++toJSON(): String
++toCSV(): String
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>455</y>
+      <w>140</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+calculates</panel_attributes>
+    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>511</y>
+      <w>140</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+includes</panel_attributes>
+    <additional_attributes>180.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>427</x>
+      <y>623</y>
+      <w>147</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Trade
+--
++orderID: UUID
++instrument: String
++quantity: Double
++price: Double
++commission: Double
++timestamp: Date
++side: String // "BUY" tai "SELL"
+
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>490</x>
+      <y>574</y>
+      <w>56</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+includes</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>371</x>
+      <y>812</y>
+      <w>259</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Broker
+--
++-commission: Double
+-portfolio: Portfolio
+
+
+--
++executeTrades(orders: List, marketData: Candle): List</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>497</x>
+      <y>742</y>
+      <w>56</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+executes</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>728</x>
+      <y>812</y>
+      <w>203</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Portfolio
+--
+-cash: Double
+-positions: Map
+-tradeHistory: List
+
+--
++applyTrade(trade: Trade)
++valuation(currentPrices: Map): Double
++availableCash(): Double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>623</x>
+      <y>861</y>
+      <w>119</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+manages</panel_attributes>
+    <additional_attributes>150.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1001</x>
+      <y>812</y>
+      <w>203</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Position
+--
++instrument: String
++quantity: Double
++averageCost: Double
+realizedPL: Double
+
+--
++unrealizedPL(currentPrice: Double): Double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>924</x>
+      <y>861</y>
+      <w>91</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+contains</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>252</x>
+      <y>245</y>
+      <w>175</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>Backtester
+--
++dataSource: MarketDataSource
++strategy: Strategy
++broker: Broker
++run(from: date, to: Date): Report
+
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1043</x>
+      <y>630</y>
+      <w>175</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>Instrument
+--
++symbol: string
++currency: String
+
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>329</x>
+      <y>154</y>
+      <w>42</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+uses</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>252</y>
+      <w>343</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+uses</panel_attributes>
+    <additional_attributes>470.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>315</x>
+      <y>343</y>
+      <w>70</w>
+      <h>525</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+uses</panel_attributes>
+    <additional_attributes>80.0;730.0;10.0;730.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>364</x>
+      <y>343</y>
+      <w>133</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+creates</panel_attributes>
+    <additional_attributes>170.0;160.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>567</x>
+      <y>665</y>
+      <w>490</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>680.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1092</x>
+      <y>707</y>
+      <w>21</w>
+      <h>119</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>616</x>
+      <y>21</y>
+      <w>525</w>
+      <h>623</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>730.0;870.0;730.0;10.0;10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+</diagram>
