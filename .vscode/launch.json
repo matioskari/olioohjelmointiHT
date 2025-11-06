@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:olioohjelmointiHT}",
+            "name": "Debug PortfolioSimulator",
+            "target": "PortfolioSimulator",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug PortfolioSimulator"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:olioohjelmointiHT}",
+            "name": "Release PortfolioSimulator",
+            "target": "PortfolioSimulator",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release PortfolioSimulator"
+        }
+    ]
+}
