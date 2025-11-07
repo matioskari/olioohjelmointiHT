@@ -1,8 +1,8 @@
 # OlioOhjelmointi harjoitustyö Sijoitussalkun simulaattori & backtesteri
 
-  📈 PortfolioSimulator
+📈 PortfolioSimulator
 CLI-pohjainen sijoitussimulaattori — analysoi strategioita, visualisoi tulokset ASCII-grafiikalla, ajaa CSV-markkinadataa ja tuottaa raportit.
-🚀 Yleiskuvaus
+  Yleiskuvaus
 
 PortfolioSimulator on Swiftillä toteutettu sijoitusstrategioiden simulaattori, jolla voi:
 
@@ -15,18 +15,19 @@ PortfolioSimulator on Swiftillä toteutettu sijoitusstrategioiden simulaattori, 
 
 Projekti toimii täysin komentoriviltä, ja sen voi ajaa millä tahansa Swift-ympäristöllä (macOS, Linux, Windows Swift toolchain).
 
-📦 Asennus
+Asennus
 1. Kloonaa projekti
-git clone https://github.com/matioskari/olioohjelmointiHT.git
-cd olioohjelmointiHT
+  git clone https://github.com/matioskari/olioohjelmointiHT.git
+  cd olioohjelmointiHT
 
 2. Rakenna projekti
-swift build
+  swift build
 
 3. Aja simulaattori
-swift run PortfolioSimulator
+  swift run PortfolioSimulator
 
-🧭 Käyttövalikko (CLI)
+
+Käyttövalikko (CLI)
 
 Ohjelma avaa valikon:
 
@@ -65,7 +66,8 @@ ASCII-grafiikka:
 10016.73 | ████████████████████████████████
 ...
 
-📁 CSV-tiedoston muoto
+
+CSV-tiedoston muoto
 
 Ohjelma hyväksyy monia päivämääräformaatteja:
 
@@ -78,22 +80,21 @@ Ja otsikkoriviksi käy:
 
 Date,Open,High,Low,Close,Volume
 
-
 tai
 
 timestamp,open,high,low,close,volume
-
 
 Esimerkki:
 
 11-06-2025,196.42,197.62,186.38,188.08,223029797
 
-🧠 Teknologiat ja rakenne
-Osa	Kuvaus
-Swift CLI	Komentoriviohjelma
-CSVDataSource	CSV-markkinadatan lukija
-Simulator	Ajaa strategiaa kynttilädatan yli
-Broker & Portfolio	Ostot, myynnit, käteinen, positio
-Strategies/	DCA ja MA Crossover -strategiat
-Reporting	CAGR, Drawdown, Sharpe, Equity Curve
-ASCII Chart Renderer	Visualisoi salkun kehityksen tekstigrafiikkana
+
+Teknologiat ja rakenne
+Osa:	                    Kuvaus:
+Swift CLI	              Komentoriviohjelma
+CSVDataSource	          CSV-markkinadatan lukija
+Simulator	              Ajaa strategiaa kynttilädatan yli
+Broker & Portfolio	    Ostot, myynnit, käteinen, positio
+Strategies/	            DCA ja MA Crossover -strategiat
+Reporting	              CAGR, Drawdown, Sharpe, Equity Curve
+ASCII Chart Renderer	  Visualisoi salkun kehityksen tekstigrafiikkana
