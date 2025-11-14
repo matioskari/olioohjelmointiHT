@@ -56,13 +56,17 @@ public final class CLI {
     private var lastReport: Report? = nil
 
     private func runDCA() {
-        print("\nDCA Strategy Setup")
+        let dataSource = CSVDataSource(filePath: "data.csv", instrument: Instrument(symbol: "AAPL", currency: .USD))
+        let companyName = dataSource.getCompanyName() ?? "Unknown Company"
+        
+        print("\nDCA Strategy Setup (using data.csv)")
+        print("Company: \(companyName)")
         print("-----------------")
         
         print("Enter investment amount (USD): ", terminator: "")
         guard let amountStr = readLine(), let amount = Double(amountStr) else {
             print("Invalid amount. Using default $500")
-            let sim = simulatorFactory.createSimulator(strategy: .dca)
+            let sim = simulatorFactory.createSimulator(strategy: .dca, csvPath: "data.csv")
             runSimulation(sim)
             return
         }
@@ -70,7 +74,7 @@ public final class CLI {
         print("Enter interval (days): ", terminator: "")
         guard let intervalStr = readLine(), let interval = Int(intervalStr) else {
             print("Invalid interval. Using default 20 days")
-            let sim = simulatorFactory.createSimulator(strategy: .dca)
+            let sim = simulatorFactory.createSimulator(strategy: .dca, csvPath: "data.csv")
             runSimulation(sim)
             return
         }
@@ -78,19 +82,24 @@ public final class CLI {
         let sim = simulatorFactory.createSimulator(
             strategy: .dca,
             dcaAmount: Money(amount, currency: .USD),
-            dcaInterval: interval
+            dcaInterval: interval,
+            csvPath: "data.csv"
         )
         runSimulation(sim)
     }
 
     private func runMA() {
-        print("\nMoving Average Strategy Setup")
+        let dataSource = CSVDataSource(filePath: "data.csv", instrument: Instrument(symbol: "AAPL", currency: .USD))
+        let companyName = dataSource.getCompanyName() ?? "Unknown Company"
+        
+        print("\nMoving Average Strategy Setup (using data.csv)")
+        print("Company: \(companyName)")
         print("--------------------------")
         
         print("Enter short period (e.g., 5): ", terminator: "")
         guard let shortStr = readLine(), let short = Int(shortStr) else {
             print("Invalid period. Using default 10 days")
-            let sim = simulatorFactory.createSimulator(strategy: .ma)
+            let sim = simulatorFactory.createSimulator(strategy: .ma, csvPath: "data.csv")
             runSimulation(sim)
             return
         }
@@ -98,14 +107,14 @@ public final class CLI {
         print("Enter long period (e.g., 20): ", terminator: "")
         guard let longStr = readLine(), let long = Int(longStr) else {
             print("Invalid period. Using default 25 days")
-            let sim = simulatorFactory.createSimulator(strategy: .ma)
+            let sim = simulatorFactory.createSimulator(strategy: .ma, csvPath: "data.csv")
             runSimulation(sim)
             return
         }
         
         if short >= long {
             print("Short period must be less than long period. Using defaults.")
-            let sim = simulatorFactory.createSimulator(strategy: .ma)
+            let sim = simulatorFactory.createSimulator(strategy: .ma, csvPath: "data.csv")
             runSimulation(sim)
             return
         }
@@ -113,7 +122,8 @@ public final class CLI {
         let sim = simulatorFactory.createSimulator(
             strategy: .ma,
             maShortPeriod: short,
-            maLongPeriod: long
+            maLongPeriod: long,
+            csvPath: "data.csv"
         )
         runSimulation(sim)
     }
@@ -130,7 +140,12 @@ public final class CLI {
     private func runCSV() {
         print("Enter CSV path: ", terminator: "")
         guard let path = readLine() else { return }
-
+        
+        // Show company name before running simulation
+        let dataSource = CSVDataSource(filePath: path, instrument: Instrument(symbol: "AAPL", currency: .USD))
+        if let companyName = dataSource.getCompanyName() {
+            print("\nCompany: \(companyName)")
+        }
         print("Running simulation with CSV data...\n")
 
         let sim = simulatorFactory.createSimulator(csvPath: path)

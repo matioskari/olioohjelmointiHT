@@ -17,7 +17,8 @@ public final class Simulator {
                           equityCurve: [],
                           cagr: 0,
                           maxDrawdown: 0,
-                          sharpe: 0)
+                          sharpe: 0,
+                          companyName: marketData.getCompanyName())
         }
 
         // 1) Strategia päättää, mitä tehdään
@@ -70,7 +71,8 @@ public final class Simulator {
             equityCurve: equityCurve,
             cagr: cagr,
             maxDrawdown: maxDD,
-            sharpe: sharpe
+            sharpe: sharpe,
+            companyName: marketData.getCompanyName()
         )
     }
 }

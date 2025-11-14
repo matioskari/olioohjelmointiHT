@@ -3,10 +3,41 @@ import Foundation
 public final class CSVDataSource: MarketDataSource {
     private let filePath: String
     private let instrument: Instrument
+    private var companyName: String?
 
     public init(filePath: String, instrument: Instrument) {
         self.filePath = filePath
         self.instrument = instrument
+    }
+    
+    public func getCompanyName() -> String? {
+        // If already parsed, return cached value
+        if let c = companyName { return c }
+
+        // Try to read only the first lines to extract the company name without parsing all candles.
+        guard let raw = try? String(contentsOfFile: filePath, encoding: .utf8) else { return nil }
+        let normalized = raw
+            .replacingOccurrences(of: "\r\n", with: "\n")
+            .replacingOccurrences(of: "\r", with: "\n")
+        let lines = normalized
+            .split(separator: "\n")
+            .map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) }
+        guard !lines.isEmpty else { return nil }
+
+        let firstLine = lines[0]
+        if firstLine.lowercased().contains("company") {
+            let companyFields = firstLine.split(separator: ",").map(String.init)
+            if companyFields.count >= 2 {
+                var name = companyFields[1].trimmingCharacters(in: .whitespacesAndNewlines)
+                if name.hasPrefix("\"") && name.hasSuffix("\"") && name.count >= 2 {
+                    name.removeFirst()
+                    name.removeLast()
+                }
+                self.companyName = name
+                return name
+            }
+        }
+        return nil
     }
 
     public func load() -> [Candle] {
@@ -28,8 +59,23 @@ public final class CSVDataSource: MarketDataSource {
             .split(separator: "\n")
             .map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) }
 
-        guard lines.count > 1 else {
+        guard lines.count > 2 else {
             print("⚠️ CSVDataSource: file is empty or contains no data rows.")
+            return []
+        }
+
+        // Check for company name in the first line
+        let firstLine = lines[0]
+        if firstLine.lowercased().contains("company") {
+            let companyFields = firstLine.split(separator: ",").map(String.init)
+            if companyFields.count >= 2 {
+                self.companyName = unquote(String(companyFields[1]))
+                lines.removeFirst() // Remove company name line
+            }
+        }
+        
+        guard lines.count > 1 else {
+            print("⚠️ CSVDataSource: file contains no data rows after company name.")
             return []
         }
 

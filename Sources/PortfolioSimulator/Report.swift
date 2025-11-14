@@ -7,9 +7,23 @@ public struct Report {
     public let cagr: Double
     public let maxDrawdown: Double
     public let sharpe: Double
+    public let companyName: String?
+    
+    public init(strategyName: String, trades: [Trade], equityCurve: [Money], cagr: Double, maxDrawdown: Double, sharpe: Double, companyName: String?) {
+        self.strategyName = strategyName
+        self.trades = trades
+        self.equityCurve = equityCurve
+        self.cagr = cagr
+        self.maxDrawdown = maxDrawdown
+        self.sharpe = sharpe
+        self.companyName = companyName
+    }
 
     public func printSummary() {
         print("=== Report ===")
+        if let company = companyName {
+            print("Company: \(company)")
+        }
         print("Strategy: \(strategyName)")
         print("Trades: \(trades.count)")
         print(String(format: "CAGR: %.2f%%", cagr * 100))

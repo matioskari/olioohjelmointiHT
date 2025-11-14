@@ -14,11 +14,14 @@ public final class SimulatorFactory {
         dcaAmount: Money? = nil,
         dcaInterval: Int? = nil,
         maShortPeriod: Int? = nil,
-        maLongPeriod: Int? = nil
+        maLongPeriod: Int? = nil,
+        csvPath: String? = nil
     ) -> Simulator {
         let instrument = Instrument(symbol: "AAPL", currency: .USD)
-
-        let dataSource = SyntheticDataSource(currency: .USD, candleCount: 500)
+        
+        // Use data.csv by default, or specified CSV path
+        let path = csvPath ?? "data.csv"
+        let dataSource = CSVDataSource(filePath: path, instrument: instrument)
         let portfolio = Portfolio(cash: Money(10_000, currency: .USD))
         let broker = Broker(commissionRate: 0.001, portfolio: portfolio)
 

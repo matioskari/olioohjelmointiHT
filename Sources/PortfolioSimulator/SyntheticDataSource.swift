@@ -11,6 +11,10 @@ public final class SyntheticDataSource: MarketDataSource {
         self.instrumentCurrency = currency
         self.candleCount = candleCount
     }
+    
+    public func getCompanyName() -> String? {
+        return "Synthetic Data"
+    }
 
     public func load() -> [Candle] {
         var candles: [Candle] = []
