@@ -1,28 +1,34 @@
+<<<<<<< HEAD
 # PortfolioSimulator – Sijoitusstrategioiden backtester (Swift / CLI)
 
-Kuvaus:
 Tämä projekti on osa kurssin Olio-ohjelmointi harjoitustyötä. Toteutin täysin komentorivipohjaisen sijoitussimulaattorin, joka tukee eri sijoitusstrategioita, CSV-datan lataamista, salkun kehityksen laskentaa sekä ASCII-grafiikkapohjaisen equity-käyrän piirtämistä.
 
 Projektissa on selkeä modulaarinen arkkitehtuuri (OOP), ja kaikki strategiat, datalähteet ja laskentalogiikka ovat helposti laajennettavissa.
 
+========
 
-Ominaisuudet:
-	- Kaksi valmista sijoitusstrategiaa:
-		- Dollar-Cost Averaging (DCA)
-		- Moving Average Crossover (10/25 SMA)
-	- Lataa markkinadata CSV-tiedostosta
-	- Moniformaattinen päivämääräparseri
-	- ASCII-grafiikkapohjainen equity curve
-	- Raporttigeneraattori, joka laskee:
-		- CAGR
-		- Max Drawdown
-		- Sharpe Ratio
-		- Voittavat/häviävät kaupat
-	- Selkeä CLI-valikko
-	- Modulaarinen arkkitehtuuri (Strategy/DataSource/Portfolio/Report)
+Ominaisuudet
 
-	
-Projketin rakenne:
+- Kaksi valmista sijoitusstrategiaa:
+	- Dollar-Cost Averaging (DCA)
+	- Moving Average Crossover (10/25 SMA)
+- Lataa markkinadata CSV-tiedostosta
+- Moniformaattinen päivämääräparseri
+- ASCII-grafiikkapohjainen equity curve
+- Raporttigeneraattori, joka laskee:
+	- CAGR
+	- Max Drawdown
+	- Sharpe Ratio
+	- Voittavat/häviävät kaupat
+- Selkeä CLI-valikko
+- Modulaarinen arkkitehtuuri (Strategy/DataSource/Portfolio/Report)
+
+========
+
+Projektin rakenne
+
+Tämä rakenne vastaa täsmälleen GitHub-projektiasi:
+
 olioohjelmointiHT/
 └── PortfolioSimulator/
     ├── Package.swift
@@ -42,10 +48,19 @@ olioohjelmointiHT/
     │       └── ASCIIChart.swift
     └── data.csv (valinnainen)
 
+========
 	
 Käyttöohje:
-Käynnistä projektin juurihakemistossa:
-	swift run
+Asennus
+1. Kloonaa projekti
+  git clone https://github.com/matioskari/olioohjelmointiHT.git
+  cd olioohjelmointiHT
+
+2. Rakenna projekti
+  swift build
+
+3. Aja simulaattori
+  swift run PortfolioSimulator
 	
 Saat näkyviin valikon:
 1. Run Dollar-Cost Averaging (DCA)
@@ -56,13 +71,13 @@ Saat näkyviin valikon:
 -----------------------------------------
 Select option:
 
+========
 
 CSV-tuonti:
 Ohjelma hyväksyy kolme eri päivämääräformaattia:
-
-	- YYYY-MM-DD
-	- MM-DD-YYYY
-	- DD-MM-YYYY
+- YYYY-MM-DD
+- MM-DD-YYYY
+- DD-MM-YYYY
 
 Esimerkki:
 Date,Open,High,Low,Close,Volume
@@ -72,8 +87,9 @@ Huomaa:
 Volume voi sisältää pilkkuja tai ei
 Hinnat voivat olla merkkijonoissa "123.45"
 
+========
 
-ASCII-käyrä:
+ASCII-käyrä
 Ohjelma tuottaa visuaalisen käyrän ilman grafiikkakirjastoja:
 
 ASCII Equity Curve
@@ -87,6 +103,7 @@ $100 |
 -----------------------------------------
 Start → … → End
 
+========
 
 Esimerkki simulaatiotuloksesta:
 === Report ===
@@ -99,11 +116,12 @@ Sharpe: 0.91
 ASCII Equity Curve:
 ██████▇▇▇▇▇███████
 
+========
 
 Teknologiat:
-	- Swift 5.9+
-	- Swift Package Manager
-	- Olio-ohjelmointi (protocol-oriented design)
-	- CSV-datan käsittely
-	- CLI-sovellus
-	- Rahoituksen tunnusluvut (Sharpe, CAGR, MDD)
+- Swift 5.9+
+- Swift Package Manager
+- Olio-ohjelmointi (protocol-oriented design)
+- CSV-datan käsittely
+- CLI-sovellus
+- Rahoituksen tunnusluvut (Sharpe, CAGR, MDD)
